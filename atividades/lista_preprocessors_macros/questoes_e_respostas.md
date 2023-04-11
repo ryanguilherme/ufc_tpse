@@ -123,3 +123,9 @@ int main() {<br>
 # **Exercise 10-3:** Write a second macro is_hex that returns true if its argument is a hex digit (0-9, A-F, a-f). The second macro should reference the first.
 
 ### **Resposta:**
+<hr>
+
+# **Exercise 10-4:** Write a preprocessor macro that swaps two integers. (For the real hacker, write one that does not use a temporary variable declared outside the macro.)
+
+### **Resposta:**
+<code style='color:pink'>#define swap(value, svalue) int hold = svalue; svalue = value; value = hold; </code>
