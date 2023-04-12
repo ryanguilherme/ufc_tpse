@@ -1,11 +1,11 @@
 #include <stdio.h>
 
-#define is_digit(value) ((value - (int)value) > 0 ? 1 : 0)
+#define is_digit(value) (((value) >= 0) && ((value) <= 9)) ? 1 : 0
 
 int main(){
-    float value;
+    int value;
     while (1){
-        scanf("%f", &value);
+        scanf("%d", &value);
         if (is_digit(value)){
             printf("decimal");
         }else{

@@ -117,12 +117,13 @@ int main() {<br>
 # **Exercise 10-2:** Write a macro is_digit that returns TRUE if its argument is a decimal digit.
 
 ### **Resposta:**
-<code style='color:pink'>#define is_digit(value) ((value - (int)value) > 0 ? 1 : 0)</code>
+<code style='color:pink'>#define is_digit(value) (((value) >= 0) && ((value) <= 9)) ? 1 : 0</code>
 <hr>
 
 # **Exercise 10-3:** Write a second macro is_hex that returns true if its argument is a hex digit (0-9, A-F, a-f). The second macro should reference the first.
 
 ### **Resposta:**
+<code style='color:pink'>#define is_hex(value) (((is_digit(value) || (((value) >= "a") && ((value) <= "f") || (((value) >= "A") && ((value) <= "F"))))) ? 1 : 0)</code>
 <hr>
 
 # **Exercise 10-4:** Write a preprocessor macro that swaps two integers. (For the real hacker, write one that does not use a temporary variable declared outside the macro.)
