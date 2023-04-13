@@ -8,17 +8,19 @@
 
 # **Question 10-1:** Example 10 -4 generates the answer 47 instead of the expected answer 144. Why? (See the hint below.)
 ## **Example 10-4. first/first.c**
-<code style='color:pink'>
-#include &ltstdio.h&gt
-#define FIRST_PART  7<br>
-#define LAST_PART 5<br>
-#define ALL_PARTS  FIRST_PART + LAST_PART<br><br>
-int main() {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("The square of all the parts is %d\n", ALL_PARTS * ALL_PARTS);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return (0);<br>
+
+```c
+#include <stdio.h>
+#define FIRST_PART  7
+#define LAST_PART 5
+#define ALL_PARTS  FIRST_PART + LAST_PART
+int main() {
+    printf("The square of all the parts is %d\n", ALL_PARTS * ALL_PARTS);
+    return (0);
 }
-</code>
-<br><br><hr>
+```
+
+<br><hr>
 
 ### **Reposta:**
 ### em <code style='color:pink'>define ALL_PARTS FIRST_PART + LAST_PART</code> não há parênteses, logo não foi definida uma ordem de precedência. Nesse sentido, o comando <code style='color:pink'>ALL_PARTS * ALL_PARTS</code> está fazendo <code style='color:pink'>FIRST_PART + LAST_PART * FIRS_PART + LAST_PART</code> ao invés de <code style='color:pink'>(FIRST_PART + LAST_PART) * (FIRST_PART + LAST_PART)</code>
