@@ -51,7 +51,7 @@
 ### Assim como na alternativa anterior, 0xFF que equivale à '1111 1111' realizará 8 operações de | (or) com todos os índices do segundo operador (a). Nesse sentido, independente do valor de 'a', serão realizadas 8 operações de | (or) em que há pelo menos um operador '1', assim, o resultado será '1111 1111' independente do valor de 'a'.
 ## c) **0xFF ^ a = !a**
 ### **Resposta:**
-### O operador 
+### O operador ^ (exclusive or) realiza a operação entre dois operandos, e quando forem diferentes resulta em '1', quando forem iguais resulta em '0'. Nesse sentido, como 0xFF = '1111 1111', todas as operações onde o operador de a for '0' resultarão em '1' pois '1 ^ 0 = 1', e onde o operador de 'a' for '1' resultarão em '0' pois '1 ^ 1 = 0', logo, todos os valores de 'a' são invertidos, resultado em '!a'. Exemplo: '1111 1111 (0xFF) ^ 0110 1011 (a) = 1001 0100'.
 ## **d) 0 & a = 0. (0 is the absorbent for AND)**
 ## **e) 0 | a = a. (0 is the identity for OR)**
 ## **f) 0 ^ a = a. (0 is the identity for XOR)**
