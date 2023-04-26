@@ -43,14 +43,20 @@
 <hr>
 
 # **4.** In this question & is bitwise and, | is bitwise or, ^ is bitwise xor, and ! is 1’s complement. a is any given two digit hexadecimal number. Explain why each of the following identities holds.
-## a) 0xFF & a = a. (0xFF is the identity for AND)
-## b) 0xFF | a = 0xFF. (0xFF is the absorbent for OR)
-## c) 0xFF ^ a = !a
-## d) 0 & a = 0. (0 is the absorbent for AND)
-## e) 0 | a = a. (0 is the identity for OR)
-## f) 0 ^ a = a. (0 is the identity for XOR)
-## g) a ^ a = 0 (a is its own inverse under XOR)
-## h) For any three two digit hexadecimal numbers a, b and c: If a ^ b = c then a ^ c = b.
+## **a) 0xFF & a = a. (0xFF is the identity for AND)**
+### **Resposta:**
+### Como 0xFF equivale à '1111 1111', a operação & (and) de 0xFF com a resultará em a pois onde o bit é '1' no primeiro operando (0xFF), manterá igual no segundo (a), pois fará 8 operações de and referentes a cada índice, ou seja, se 'a' for '1001 1101', essa operação realizará as seguintes operações: 1 and 1 (1), 1 and 0 (10), 1 and 0 (100), 1 and 1 (1001), 1 and 1 (1001 1), ..., 1 and 1 (1001 1101).
+## b) **0xFF | a = 0xFF. (0xFF is the absorbent for OR)**
+### **Resposta:**
+### Assim como na alternativa anterior, 0xFF que equivale à '1111 1111' realizará 8 operações de | (or) com todos os índices do segundo operador (a). Nesse sentido, independente do valor de 'a', serão realizadas 8 operações de | (or) em que há pelo menos um operador '1', assim, o resultado será '1111 1111' independente do valor de 'a'.
+## c) **0xFF ^ a = !a**
+### **Resposta:**
+### O operador 
+## **d) 0 & a = 0. (0 is the absorbent for AND)**
+## **e) 0 | a = a. (0 is the identity for OR)**
+## **f) 0 ^ a = a. (0 is the identity for XOR)**
+## **g) a ^ a = 0 (a is its own inverse under XOR)**
+## **h) For any three two digit hexadecimal numbers a, b and c: If a ^ b = c then a ^ c = b.**
 
 <hr>
 
