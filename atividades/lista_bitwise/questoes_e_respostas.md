@@ -53,9 +53,17 @@
 ### **Resposta:**
 ### O operador ^ (exclusive or) realiza a operação entre dois operandos, e quando forem diferentes resulta em '1', quando forem iguais resulta em '0'. Nesse sentido, como 0xFF = '1111 1111', todas as operações onde o operador de a for '0' resultarão em '1' pois '1 ^ 0 = 1', e onde o operador de 'a' for '1' resultarão em '0' pois '1 ^ 1 = 0', logo, todos os valores de 'a' são invertidos, resultado em '!a'. Exemplo: '1111 1111 (0xFF) ^ 0110 1011 (a) = 1001 0100'.
 ## **d) 0 & a = 0. (0 is the absorbent for AND)**
+### **Resposta:**
+### Como a operação & (and) só resulta em '1' quando ambos os operadores são '1', ao realizar essa operação com 0 que equivale à '0000 0000' sempre retornará '0000 0000', pois realizará oito operações de and em que em cada uma, pelo menos um dos operadores é '0'.
 ## **e) 0 | a = a. (0 is the identity for OR)**
+### **Resposta:**
+### A operação | (or) resulta em '1' quando há pelo menos um '1' nos operadores, ou seja, '1 | 0; 0 | 1; 1 | 1'. Nesse sentido, '0000 0000 | a' resulta em 'a' pois onde há '1' em 'a' retornará '1', pois será feito '0 | 1', e onde há '0' em 'a' retornará '0' pois será feito '0 | 0'.
 ## **f) 0 ^ a = a. (0 is the identity for XOR)**
+### **Resposta:**
+### A operação ^ (or exclusivo) resulta em '1' quando os dois operadores são diferentes, ou seja, um operador é '1' e outro '0', quando ambos são iguais retorna '0', ou seja, quando ambos são '1' ou ambos são '0'. Nesse sentido, a operação '0000 0000 ^ a' retorna 'a' pois onde há '1' em 'a' realizará '0 ^ 1 = 1', e onde há '0' em há realizará '0 ^ 0 = 0', deste modo, qualquer que seja o valor de 'a', a operação '0 ^ a' resulta em 'a'.
 ## **g) a ^ a = 0 (a is its own inverse under XOR)**
+### **Resposta:**
+### A operação ^ (or exlusivo) retorna '0' quando ambos os operadores são iguais, exemplo: '1 ^ 1 = 0', '0 ^ 0 = 0', logo, realizar esta operação com dois valores identicos (a ^ a) resulta em 0.
 ## **h) For any three two digit hexadecimal numbers a, b and c: If a ^ b = c then a ^ c = b.**
 
 <hr>
