@@ -22,7 +22,7 @@
 /*****************************************************************************
 **                INTERNAL MACRO DEFINITIONS
 *****************************************************************************/
-#define TIME													1000000
+#define TIME													1000000/4
 #define TOGGLE          										(0x01u)
 
 #define CM_PER_GPIO1											0xAC
@@ -67,6 +67,9 @@ static void ledToggle4();
  */
 int _main(void){
 	flagBlink=0;	//init flag
+	flagBlink2=0;
+	flagBlink3=0;
+	flagBlink4=0;
   	
 	/* Configure the green LED control pin. */
   	ledInit();
