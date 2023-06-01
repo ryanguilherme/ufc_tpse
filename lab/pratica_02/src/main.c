@@ -41,6 +41,9 @@
 #define CM_conf_lcd_data2										0x08A8
 #define CM_conf_lcd_data3										0x08AC
 
+#define WDT1													0x44E35000
+#define WDT_WSPR												0x48
+#define WDT_WWPS												0x34
 
 
 
@@ -79,6 +82,11 @@ static void protoboardLedToggle4();
  * =====================================================================================
  */
 int _main(void){
+	HWREG(WDT1+WDT_WSPR) = 0xAAAA;
+	while ((HWREG(WDT1+WDT_WWPS) & (1<<4)) != 0 ) { }
+	HWREG(WDT1+WDT_WSPR) = 0x5555;
+	while ((HWREG(WDT1+WDT_WWPS) & (1<<4)) != 0 ) { }
+
 	flagBlink=0;	//init flag
 	flagBlink2=0;
 	flagBlink3=0;
