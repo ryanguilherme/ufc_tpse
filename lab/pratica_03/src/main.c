@@ -27,8 +27,15 @@
 
 #define CM_PER_GPIO1											0xAC
 #define CM_PER_GPIO2											0xB0
+#define CM_PER_GPIO3											0xB4
+
+#define GPIO_DATAIN												0x138
+
+// clock enable
 #define CM_PER_GPIO1_CLKCTRL_MODULEMODE_ENABLE   				(0x2u)
 #define CM_PER_GPIO1_CLKCTRL_OPTFCLKEN_GPIO_1_GDBCLK   			(0x00040000u)
+#define CM_PER_GPIO3_CLKCTRL_MODULEMODE_ENABLE					(0x2u)
+#define CM_PER_GPIO3_CLKCTRL_OPTFCLKEN_GPIO_3_GDBCLK			(0x00040000u)
 
 #define CM_conf_gpmc_ben1      	 								0x0878
 #define CM_conf_gpmc_a5         								0x0854
@@ -40,6 +47,7 @@
 #define CM_conf_lcd_data1										0x08A4
 #define CM_conf_lcd_data2										0x08A8
 #define CM_conf_lcd_data3										0x08AC
+#define CM_conf_mcasp0_fsr										0x09A4
 
 #define WDT1													0x44E35000
 #define WDT_WSPR												0x48
@@ -66,6 +74,7 @@ unsigned int protoFlagBlink4;
 *****************************************************************************/
 static void delay();
 static void ledInit();
+static void buttonInit();
 static void ledToggle();
 static void ledToggle2();
 static void ledToggle3();
@@ -82,6 +91,7 @@ static void protoboardLedToggle4();
  * =====================================================================================
  */
 int _main(void){
+	// disable watchdog
 	HWREG(WDT1+WDT_WSPR) = 0xAAAA;
 	while ((HWREG(WDT1+WDT_WWPS) & (1<<4)) != 0 ) { }
 	HWREG(WDT1+WDT_WSPR) = 0x5555;
@@ -97,10 +107,24 @@ int _main(void){
 	protoFlagBlink4=0;
   	
 	/* Configure the green LED control pin. */
+	buttonInit();
   	ledInit();
   
+
   	while (1){
     	/* Change the state of the green LED. */
+    	if ((HWREG(SOC_GPIO_3_REGS+GPIO_DATAIN) & (1<<19)) == 0) {
+    		while((HWREG(SOC_GPIO_3_REGS+GPIO_DATAIN) & (1<<19)) == 0) {
+    			ledToggle();
+    			ledToggle2();
+    			ledToggle3();
+    			ledToggle4();
+    			protoboardLedToggle1();
+    			protoboardLedToggle2();
+    			protoboardLedToggle3();
+    			protoboardLedToggle4();
+    		}
+    	}
     	ledToggle();
 		delay();
 		ledToggle2();
@@ -133,14 +157,44 @@ static void delay(){
 	for(ra = 0; ra < TIME; ra ++);
 }
 
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  buttonInit
+ *  Description:  configure the clock of the GPIO used for the button, and the mux pin
+ * =====================================================================================
+ */
+
+
+void buttonInit(){
+
+
+	unsigned int val_temp_button;
+	/*-----------------------------------------------------------------------------
+	 *  configure clock GPIO in clock module
+	 *-----------------------------------------------------------------------------*/
+	HWREG(SOC_CM_PER_REGS+CM_PER_GPIO3) |= CM_PER_GPIO3_CLKCTRL_OPTFCLKEN_GPIO_3_GDBCLK | CM_PER_GPIO3_CLKCTRL_MODULEMODE_ENABLE;
+	
+	/*-----------------------------------------------------------------------------
+	 * configure mux pin in control module
+	 *-----------------------------------------------------------------------------*/
+	HWREG(SOC_CONTROL_REGS+CM_conf_mcasp0_fsr) |= (1<<5);
+	// HWREG(SOC_CONTROL_REGS+CM_conf_mcasp0_fsr) &= ~(1<<3);
+	HWREG(SOC_CONTROL_REGS+CM_conf_mcasp0_fsr) |= 7;
+	val_temp_button = HWREG(SOC_GPIO_3_REGS+GPIO_OE);
+	val_temp_button |= (1<<19);
+	HWREG(SOC_GPIO_3_REGS+GPIO_OE) = val_temp_button;
+
+
+}
 
 /* 
  * ===  FUNCTION  ======================================================================
  *         Name:  ledInit
- *  Description:  
+ *  Description:  configure the clock of the GPIO used for the leds, and the mux pin
  * =====================================================================================
  */
-void ledInit( ){
+
+void ledInit(){
 	
 	unsigned int val_temp; 	
 	unsigned int val_temp_protoboard;
@@ -166,7 +220,7 @@ void ledInit( ){
 	 *  set pin direction 
 	 *-----------------------------------------------------------------------------*/
 	val_temp = HWREG(SOC_GPIO_1_REGS+GPIO_OE);
-	val_temp &= ~(1<<21);
+	val_temp &= ~(1<<21);	
 	val_temp &= ~(1<<22);
 	val_temp &= ~(1<<23);
 	val_temp &= ~(1<<24);
