@@ -113,7 +113,10 @@ int main(void){
     uartPutC(UART0, '\n');
 
     int delayIN = 1;
+    char buffer[4];
     uartPutString(UART0, "CHOOSE A DELAY IN MS: ", 23);
+
+    uartgetString(UART0, buffer, 4);
 
     while (1){
         /* Change the state of the green LED. */

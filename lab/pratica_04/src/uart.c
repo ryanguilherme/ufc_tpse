@@ -68,4 +68,3 @@ int uartgetString(UART_t uart, char *buf, unsigned int length){
    }
    return(length);
 }
-
