@@ -49,6 +49,8 @@
  * =====================================================================================
  */
 
+
+
 unsigned int flagBlink;
 unsigned int flagBlink2;
 unsigned int flagBlink3;
@@ -113,10 +115,23 @@ int main(void){
     uartPutC(UART0, '\n');
 
     int delayIN = 1;
-    char buffer[4];
-    uartPutString(UART0, "CHOOSE A DELAY IN MS: ", 23);
+    // char buffer[4];
+    // uartPutString(UART0, "CHOOSE A DELAY IN MS: ", 23);
 
-    uartgetString(UART0, buffer, 4);
+    // uartgetString(UART0, buffer, 4);
+
+    /*
+    Frequencia alvo: 62.5 Heartz
+    Para cada led há um delay de 1 milisegundo
+    Como há 8 leds, o delay é chamado para acender 8 vezes
+    Como o delay também apaga o led 8 vezes, então o nosso perído equivale a 16 delays
+    Logo, nosso período é 16ms
+    Para calcular a frequência fazemos: F = 1/T onde F = frequência e T = período
+    Sabendo que nosso período é 16ms, então fazemos F = 1/16 = 0.0625 KHz
+    Esse resultado foi dado em KHz pois o período que utilizamos está em milisegundos, não segundos
+    Para converter a frequência de KHz para Hz fazemos F * 10³
+    Logo, 0.0625 * 10³ = 62.5Hz, a frequência alvo.
+    */
 
     while (1){
         /* Change the state of the green LED. */
