@@ -109,12 +109,12 @@ int main(void){
     /* Configure the green LED control pin. */
     ledInit();
 
-    uartPutString(UART0, "LEDS INITIALIZING", 18);
+    //uartPutString(UART0, "LEDS INITIALIZING", 18);
 //    uartPutString(UART0, "LED BLINK\n", 11);
 
-    uartPutC(UART0, '\n', 2);
+    //uartPutString(UART0, '\n', 2);
 
-    int delayIN = 25;
+    int delayIN = 1;
     // char buffer[4];
     // uartPutString(UART0, "CHOOSE A DELAY IN MS: ", 23);
 
@@ -135,31 +135,32 @@ int main(void){
 
     while (1){
         /* Change the state of the green LED. */
-        uartPutString(UART0, "LEDS BLINK\n", 12);
+        //uartPutString(UART0, "LEDS BLINK", 11);
+        //Delay(delayIN);
         ledToggle();
         //uartPutString(UART0, "LED BLINK", 10);
         Delay(delayIN);
         ledToggle2();
         //uartPutString(UART0, "LED BLINK", 10);
-        //Delay(delayIN);
+        Delay(delayIN);
         ledToggle3();
         //uartPutString(UART0, "LED BLINK", 10);
-        //Delay(delayIN);
+        Delay(delayIN);
         ledToggle4();
         //uartPutString(UART0, "LED BLINK", 10);
-        //Delay(delayIN);
+        Delay(delayIN);
         protoboardLedToggle1();
         //uartPutString(UART0, "LED BLINK", 10);
-        //Delay(delayIN);
+        Delay(delayIN);
         protoboardLedToggle2();
         //uartPutString(UART0, "LED BLINK", 10);
-        //Delay(delayIN);
+        Delay(delayIN);
         protoboardLedToggle3();
         //uartPutString(UART0, "LED BLINK", 10);
-        //Delay(delayIN);
+        Delay(delayIN);
         protoboardLedToggle4();
         //uartPutString(UART0, "LED BLINK", 10);
-        //Delay(delayIN);
+        Delay(delayIN);
     }
 
 	return(0);
