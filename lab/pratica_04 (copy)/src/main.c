@@ -85,7 +85,6 @@ int main(void){
     gpioInitModule(GPIO1);
     gpioInitModule(GPIO2);
     ledConfig();
-    HWREG(INTCPS + INTC_MIR_CLEAR2) |= (1<<31);
     HWREG(INTCPS + INTC_MIR_CLEAR3) |= (1<<2);//(98 --> Bit 2 do 4º registrador (MIR CLEAR3))
 
     butConfig();
@@ -111,7 +110,7 @@ int main(void){
     */
 
     while (1){
-        // uartPutString(UART0, "ENTERED WHILE\n\r", 16);
+        uartPutString(UART0, "ENTERED WHILE\n\r", 16);
         if (flag_gpio) {
             gpioSetPinValue(GPIO1, 21, HIGH);
             gpioSetPinValue(GPIO1, 22, HIGH);

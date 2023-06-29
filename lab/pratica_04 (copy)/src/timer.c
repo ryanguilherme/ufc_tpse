@@ -19,6 +19,8 @@
 #include "timer.h"
 #include "uart.h"
 
+#define INTERRUPT
+
 /******************************************************************************
 **                      INTERNAL FUNCTION PROTOTYPES
 *******************************************************************************/
@@ -160,7 +162,21 @@ void DMTimerSetUp(void){
 }
 
 #ifdef INTERRUPT
-
+/*FUNCTION*-------------------------------------------------------
+*
+* Function Name : Delay
+* Comments      :
+*END*-----------------------------------------------------------*/
+void delay(unsigned int mSec){
+	while(mSec != 0){
+        DMTimerCounterSet(SOC_DMTIMER_7_REGS, 0);
+        DMTimerEnable(SOC_DMTIMER_7_REGS);
+        while(DMTimerCounterGet(SOC_DMTIMER_7_REGS) < TIMER_1MS_COUNT);
+        DMTimerDisable(SOC_DMTIMER_7_REGS);
+        mSec--;
+    }
+}
+#else
 void delay(unsigned int mSec){
 
     unsigned int countVal = TIMER_OVERFLOW - (mSec * TIMER_1MS_COUNT);
@@ -183,23 +199,6 @@ void delay(unsigned int mSec){
 
     /* Disable the DMTimer interrupts */
     HWREG(SOC_DMTIMER_7_REGS + DMTIMER_IRQENABLE_CLR) = 0x2;
-}
-
-#else
-
-/*FUNCTION*-------------------------------------------------------
-*
-* Function Name : Delay
-* Comments      :
-*END*-----------------------------------------------------------*/
-void delay(unsigned int mSec){
-	while(mSec != 0){
-        DMTimerCounterSet(SOC_DMTIMER_7_REGS, 0);
-        DMTimerEnable(SOC_DMTIMER_7_REGS);
-        while(DMTimerCounterGet(SOC_DMTIMER_7_REGS) < TIMER_1MS_COUNT);
-        DMTimerDisable(SOC_DMTIMER_7_REGS);
-        mSec--;
-    }
 }
 
 #endif //INTERRUPT
