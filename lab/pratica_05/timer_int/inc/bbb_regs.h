@@ -50,14 +50,24 @@
 #define CM_PER_TIMER7_CLKCTRL					0x44E0007C
 #define SOC_CM_DPLL_CLKSEL_TIMER7_CLK          	0x44E00504
 
-/* CM_PER_GMPCA6 */
+/* CM_PER_GMPCA */
+#define CM_PER_GPMCA5_REGS                      0x44E10854
 #define CM_PER_GMPCA6_REGS                      0x44E10818
+#define CM_PER_GPMCA7_REGS                      0x44E10868
+#define CM_PER_GPMCA8_REGS                      0x44E10860
+
+/* LCD_DATA */
+#define CM_CONF_LCD_DATA0                       0x44E108A8
+#define CM_CONF_LCD_DATA1                       0x44E108AC
 
 /* GPIO */
 #define GPIO1_OE            					0x4804C134
 #define GPIO1_SETDATAOUT   				 		0x4804C194
 #define GPIO1_CLEARDATAOUT  					0x4804C190
 
+#define GPIO2_OE                                0x481AC134
+#define GPIO2_SETDATAOUT                        0x481AC194
+#define GPIO2_CLEARDATAOUT                      0x481AC190
 
 /* The Input clock is selected as 24MHz. So for 1ms set the count to 0x5DC0. 
  *If the input clock is changed to different source this value has to be updated 
