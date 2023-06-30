@@ -39,6 +39,7 @@ void gpioIsrHandler(void){
 void ISR_Handler(void){
     /* Verify active IRQ number */
     unsigned int irq_number = HWREG(INTCPS + INTC_SIR_IRQ) & 0x7f;
+    uartPutString(UART0, "INTERRUPTION TRIGGERED\n\r", 25);
 
     if(irq_number == 98)
         gpioIsrHandler();
@@ -47,4 +48,25 @@ void ISR_Handler(void){
 
     /* acknowledge IRQ */
     HWREG(INTCPS + INTC_CONTROL) = 0x1;
+}
+
+void mirClear(int number) {
+    int MIR_CLEAR = number / 32;
+    int SOURCE = number % 32;
+    switch (MIR_CLEAR) {
+        case 0:
+            HWREG(INTCPS + INTC_MIR_CLEAR0) |= (1<<SOURCE);
+            break;
+        case 1:
+            HWREG(INTCPS + INTC_MIR_CLEAR1) |= (1<<SOURCE);
+            break;
+        case 2:
+            HWREG(INTCPS + INTC_MIR_CLEAR2) |= (1<<SOURCE);
+            break;
+        case 3:
+            HWREG(INTCPS + INTC_MIR_CLEAR3) |= (1<<SOURCE);
+            break;
+        default:
+            break;
+    }
 }

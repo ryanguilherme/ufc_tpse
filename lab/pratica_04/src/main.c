@@ -16,34 +16,21 @@
  * =====================================================================================
  */
 
-#define CM_PER_GPMCBEn1_REGS                    0x44E10878
-
-#include "uart.h"
-#include <stdio.h>
 #include "timer.h"
 #include "gpio.h"
 #include "hw_types.h"
-#include "clock_module.h"
-#include "pad.h"
 #include "soc_AM335x.h"
-#include "control_module.h"
 #include "led.h"
 #include "interrupt.h"
 
 /*****************************************************************************
 **                INTERNAL MACRO DEFINITIONS
 *****************************************************************************/
+#define CM_PER_GPMCBEn1_REGS                    0x44E10878
 
 /*****************************************************************************
 **                INTERNAL FUNCTION PROTOTYPES
 *****************************************************************************/
-	
-/* 
- * ===  FUNCTION  ======================================================================
- *         Name:  main
- *  Description:  
- * =====================================================================================
- */
 
 bool flag_gpio;
 
@@ -72,43 +59,36 @@ void butConfig ( ){
 
     /* Enable interrupt generation on detection of a rising edge.*/
     HWREG(SOC_GPIO_1_REGS + GPIO_RISINGDETECT) |= 1<<28;
+
+    /* Enable debounce for pin 28 GPIO1 */
+    HWREG(SOC_GPIO_1_REGS + GPIO_DEBOUNCENABLE) |= 1<<28;
 }/* -----  end of function butConfig  ----- */
 
+
+/*
+ * ===  FUNCTION  ======================================================================
+ *         Name:  main
+ *  Description:
+ * =====================================================================================
+ */
 int main(void){
-    /* Interrupt mask */
+
     disableWdt();
-    /*-----------------------------------------------------------------------------
-	 *  initialize TIMER modules
-	 *-----------------------------------------------------------------------------*/
+
     DMTimerSetUp();
 
     gpioInitModule(GPIO1);
     gpioInitModule(GPIO2);
     ledConfig();
-    HWREG(INTCPS + INTC_MIR_CLEAR2) |= (1<<31);
-    HWREG(INTCPS + INTC_MIR_CLEAR3) |= (1<<2);//(98 --> Bit 2 do 4º registrador (MIR CLEAR3))
+//    HWREG(INTCPS + INTC_MIR_CLEAR2) |= (1<<31);
+//    HWREG(INTCPS + INTC_MIR_CLEAR3) |= (1<<2);//(98 --> Bit 2 do 4º registrador (MIR CLEAR3))
+
+    mirClear(95);
+    mirClear(98);
 
     butConfig();
-	/*-----------------------------------------------------------------------------
-	 *  initialize UART modules
-	 *-----------------------------------------------------------------------------*/
-	//uartInitModule(UART0, 115200, STOP1, PARITY_NONE, FLOW_OFF);
 
     unsigned int delayIN = 100;
-
-
-    /*
-    Frequencia alvo: 62.5 Heartz
-    Para cada led há um delay de 1 milisegundo
-    Como há 8 leds, o delay é chamado para acender 8 vezes
-    Como o delay também apaga o led 8 vezes, então o nosso perído equivale a 16 delays
-    Logo, nosso período é 16ms
-    Para calcular a frequência fazemos: F = 1/T onde F = frequência e T = período
-    Sabendo que nosso período é 16ms, então fazemos F = 1/16 = 0.0625 KHz
-    Esse resultado foi dado em KHz pois o período que utilizamos está em milisegundos, não segundos
-    Para converter a frequência de KHz para Hz fazemos F * 10³
-    Logo, 0.0625 * 10³ = 62.5Hz, a frequência alvo.
-    */
 
     while (1){
         // uartPutString(UART0, "ENTERED WHILE\n\r", 16);

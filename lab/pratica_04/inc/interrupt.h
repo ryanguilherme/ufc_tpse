@@ -24,5 +24,6 @@ extern bool flag_timer;
 void gpioIsrHandler(void);
 void ISR_Handler(void);
 void timerIrqHandler(void);
+void mirClear(int);
 
 #endif //INTERRUPT_H
