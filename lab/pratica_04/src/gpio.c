@@ -102,7 +102,7 @@ void gpioInitModule(gpioMod mod){
     		unsigned int setting = (1<<18) | (0x2<<0);   //enable functional clock & enable module, TRM 8.1.12.1.29
       		switch(mod){
         		case GPIO0:
-           			return;        // GPIO0 doesnt have a clock module register, TRM 8.1.12.1
+           			return;        // GPIO0 doesn't have a clock module register, TRM 8.1.12.1
             		break;
          		case GPIO1:
             			ckmSetCLKModuleRegister(CKM_PER, CKM_PER_GPIO1_CLKCTRL, setting);

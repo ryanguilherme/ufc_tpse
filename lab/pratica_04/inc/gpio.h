@@ -65,14 +65,14 @@ typedef unsigned char ucPinNumber;
 typedef enum _pinLevel{
 	LOW,
 	HIGH
-}pinLevel;				/* ----------  end of enum pinLevel  ---------- */
+}pinLevel;				    /* ----------  end of enum pinLevel  ---------- */
 
 typedef enum _gpioMod{
 	GPIO0,
 	GPIO1,
 	GPIO2,
 	GPIO3
-}gpioMod;				/* ----------  end of enum gpioMod  ---------- */
+}gpioMod;				    /* ----------  end of enum gpioMod  ---------- */
 
 typedef enum _pinDirection{
 	OUTPUT,
