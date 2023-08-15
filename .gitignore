@@ -1,3 +1,7 @@
 .idea/
 /.idea
 **/.idea
+
+crosstool-ng
+/crosstool-ng
+**/crosstool-ng
