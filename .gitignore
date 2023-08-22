@@ -5,3 +5,7 @@
 crosstool-ng
 /crosstool-ng
 **/crosstool-ng
+
+u-boot
+/u-boot
+**/u-boot
