@@ -9,3 +9,12 @@ crosstool-ng
 u-boot
 /u-boot
 **/u-boot
+
+linux
+/linux
+**/linux
+
+busybox
+/busybox
+**/busybox
+
