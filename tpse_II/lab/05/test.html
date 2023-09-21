@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>LED CONTROL</title>
+<style>
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button:hover {
+    background-color: #4CAF00;
+}
+</style>
+
+</head>
+<body>
+    <h2>LED control module</h2>
+    <p>LEDs currently status: <span id="status">off</span></p>
+    <button onclick="ligarLEDs()">ON</button>
+    <button style="background-color:#ff191b" onclick="desligarLEDs()">OFF</button>
+
+    <script>
+
+        function salvarStatus(novoStatus) {
+            // Simulação de escrita no arquivo usando uma solicitação HTTP local
+            const url = '/home/ryan/Documents/ufc/eng_comp/ufc_tpse/tpse_II/lab/05/ledStatus.txt';
+
+            fetch(url, {
+                method: 'POST',
+                body: novoStatus,
+            }).then(response => {
+                if (response.ok) {
+                    alert(`LED status successfully updated: ${novoStatus}`);
+                    lerStatus(); // Atualize o status na página
+                } else {
+                    alert('Error trying to update LED status.');
+                }
+            }).catch(error => {
+                alert('ERROR: ' + error);
+            });
+        }
+
+        function ligarLEDs() {
+            document.getElementById('status').textContent = 'on';
+            salvarStatus(1);
+        }
+
+        function desligarLEDs() {
+            document.getElementById('status').textContent = 'off';
+            salvarStatus(0);
+        }
+
+    </script>
+</body>
+</html>

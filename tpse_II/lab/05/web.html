@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button:hover {
+    background-color: #4CAF00;
+}
+
+</style>
+</head>
+<body>
+
+<h2>LED control module</h2>
+
+<button id="onbutton" class="button" onclick="ligarLEDs()">ON</button>
+<button class="button" style="background-color:#ff191b" onclick="desligarLEDs()">OFF</button>
+
+<p>Leds are currently: <strong><span id='status'>off</span></strong></p>
+
+<script>
+function ligarLEDs() {
+  document.getElementById('status').textContent = 'on';
+}
+
+function desligarLEDs() {
+  document.getElementById('status').textContent = 'off';
+}
+</script>
+
+</body>
+</html>
