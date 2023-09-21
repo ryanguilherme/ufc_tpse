@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LED control</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</style>
+
+</head>
+<body>
+    <div class="main">
+    <h2>LED CONTROL MODULE</h2>
+    <form>
+        <label for="led">Choose a LED:</label>
+        <select id="led" name="led">
+            <option value="0">LED 0</option>
+            <option value="1">LED 1</option>
+            <option value="2">LED 2</option>
+            <option value="3">LED 3</option>
+        </select>
+        <button type="button" class="button" onclick="ligarLED()">ON</button>
+        <button type="button" class="button" style="background-color:red" onclick="desligarLED()">OFF</button>
+    </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
